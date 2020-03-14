@@ -1,0 +1,7 @@
+name: CoronaCraft
+version: ${project.version}
+main: dev.nishappsucrose.coronacraft.CoronaCraft
+api-version: 1.13
+commands:
+  loadimage:
+    description: Test map an image to a glass pane matrix
