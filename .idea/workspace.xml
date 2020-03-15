@@ -2,13 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efc6492d-35c3-4eeb-bfc4-1479aa4f0445" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_15_2_R0_1_SNAPSHOT.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_spigotmc_spigot_api_1_15_2_R0_1_SNAPSHOT.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +92,7 @@
       <option name="presentableId" value="Default" />
       <updated>1584136440082</updated>
       <workItem from="1584136454176" duration="8431000" />
-      <workItem from="1584296329487" duration="2208000" />
+      <workItem from="1584296329487" duration="3385000" />
     </task>
     <servers />
   </component>
@@ -112,22 +108,22 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="683" y="150" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1440.877@0.23.1440.877" timestamp="1584175112701" />
-    <state width="1146" height="133" key="GridCell.Tab.0.bottom" timestamp="1584300111280">
+    <state width="1030" height="133" key="GridCell.Tab.0.bottom" timestamp="1584303900974">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1146" height="133" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1584300111280" />
-    <state width="1146" height="133" key="GridCell.Tab.0.center" timestamp="1584300111278">
+    <state width="1030" height="133" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1584303900974" />
+    <state width="1030" height="133" key="GridCell.Tab.0.center" timestamp="1584303900964">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1146" height="133" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1584300111278" />
-    <state width="1146" height="133" key="GridCell.Tab.0.left" timestamp="1584300111253">
+    <state width="1030" height="133" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1584303900964" />
+    <state width="1030" height="133" key="GridCell.Tab.0.left" timestamp="1584303900964">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1146" height="133" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1584300111253" />
-    <state width="1146" height="133" key="GridCell.Tab.0.right" timestamp="1584300111279">
+    <state width="1030" height="133" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1584303900964" />
+    <state width="1030" height="133" key="GridCell.Tab.0.right" timestamp="1584303900971">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
-    <state width="1146" height="133" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1584300111279" />
+    <state width="1030" height="133" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1584303900971" />
     <state x="128" y="43" key="SettingsEditor" timestamp="1584296298956">
       <screen x="0" y="23" width="1440" height="877" />
     </state>

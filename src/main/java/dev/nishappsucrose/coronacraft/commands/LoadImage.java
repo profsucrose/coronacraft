@@ -27,6 +27,8 @@ public class LoadImage implements CommandExecutor {
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
     public static Plugin plugin;
     public static Integer taskId;
+    private static final String[] streamIds = {"one", "two", "three", "four"};
+    private static final int[][] streamCoords = {{-192, 192}, {-135, 192}, {-192, 249}, {-135, 249}};
 
     private static final Material[] CONCRETES = {
             Material.WHITE_CONCRETE,
@@ -69,68 +71,77 @@ public class LoadImage implements CommandExecutor {
             {0, 0, 0}
     };
 
-    static private void loadImage(CommandSender sender, int mapSize) {
+    static private void loadStreams(CommandSender sender) {
 
         Player player = (Player) sender;
 
         // -65 4 192
         // -192 4 319
 
-        BufferedImage image = null;
+        for (int i = 0; i < 4; i++) {
+            BufferedImage image = null;
+            String channel = streamIds[i];
+            int x = streamCoords[i][0];
+            int y = streamCoords[i][1];
 
-        try {
-            URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/videostreams/test");
-            HttpURLConnection con = (HttpURLConnection) streamCaptureDownload.openConnection();
-            con.setRequestMethod("GET");
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer content = new StringBuffer();
-            while ((inputLine = in.readLine()) != null) {
-                content.append(inputLine);
-            }
-            in.close();
-            con.disconnect();
-            String base64String = content.toString().split("data:image/jpeg;base64,")[1].split("\"    ")[0];
-
-            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
-
-            image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
-
-            sender.sendMessage("Loading image to map");
-
-            for (int mapY = 0; mapY < mapSize; mapY++) {
-                for (int mapX = mapSize - 1; mapX > -1; mapX--) {
-
-                    System.out.println(mapX + ", " + mapY);
-
-                    int color = image.getRGB(mapX, mapY);
-                    int red = (color & 0x00ff0000) >> 16;
-                    int green = (color & 0x0000ff00) >> 8;
-                    int blue = color & 0x000000ff;
-
-                    int currentBlockIndex = 0;
-                    double currentBlockDiff = getBlockDiff(red, green, blue, CONCRETE_RGBS[0]);
-
-                    for (int rgbI = 1; rgbI < CONCRETE_RGBS.length; rgbI++) {
-                        int[] rgb = CONCRETE_RGBS[rgbI];
-                        double difference = getBlockDiff(red, green, blue, rgb);
-                        if (difference < currentBlockDiff) {
-                            currentBlockDiff = difference;
-                            currentBlockIndex = rgbI;
-                        }
-                    }
-
-                    player.getWorld().getBlockAt(-192 + mapX, 4, mapY + 192).setType(CONCRETES[currentBlockIndex]);
-                    System.out.println("RGB: " + red + ", " + green + ", " + blue);
-                    System.out.println("Placed concrete at index: " + currentBlockIndex);
-
+            try {
+                URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/videostreams/" + channel);
+                HttpURLConnection con = (HttpURLConnection) streamCaptureDownload.openConnection();
+                con.setRequestMethod("GET");
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
                 }
-            }
+                in.close();
+                con.disconnect();
+                if (content.toString().contains("data:image/jpeg;base64,")) {
+                    String base64String = content.toString().split("data:image/jpeg;base64,")[1].split("\"    ")[0];
 
-        } catch (IOException e) {
-            sender.sendMessage(ERROR_COLOR + "Could not load image");
-            e.printStackTrace();
+                    byte[] decodedBytes = Base64.getDecoder().decode(base64String);
+
+                    image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+                } else {
+                    image = ImageIO.read(new URL("https://i.imgur.com/zrYfqjY.jpg"));
+                }
+
+                sender.sendMessage("Loading image to map");
+
+                for (int mapY = 0; mapY < 50; mapY++) {
+                    for (int mapX = 49; mapX > -1; mapX--) {
+
+                        System.out.println(mapX + ", " + mapY);
+
+                        int color = image.getRGB(mapX, mapY);
+                        int red = (color & 0x00ff0000) >> 16;
+                        int green = (color & 0x0000ff00) >> 8;
+                        int blue = color & 0x000000ff;
+
+                        int currentBlockIndex = 0;
+                        double currentBlockDiff = getBlockDiff(red, green, blue, CONCRETE_RGBS[0]);
+
+                        for (int rgbI = 1; rgbI < CONCRETE_RGBS.length; rgbI++) {
+                            int[] rgb = CONCRETE_RGBS[rgbI];
+                            double difference = getBlockDiff(red, green, blue, rgb);
+                            if (difference < currentBlockDiff) {
+                                currentBlockDiff = difference;
+                                currentBlockIndex = rgbI;
+                            }
+                        }
+
+                        player.getWorld().getBlockAt(x + mapX, 4, y + 192).setType(CONCRETES[currentBlockIndex]);
+                        System.out.println("RGB: " + red + ", " + green + ", " + blue);
+                        System.out.println("Placed concrete at index: " + currentBlockIndex);
+
+                    }
+                }
+
+            } catch (IOException e) {
+                sender.sendMessage(ERROR_COLOR + "Could not load image");
+                e.printStackTrace();
+            }
         }
     }
 
@@ -149,7 +160,7 @@ public class LoadImage implements CommandExecutor {
             taskId = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    loadImage(sender, mapSize);
+                    loadStreams(sender);
                 }
             }.runTaskTimer(plugin, 0, 15).getTaskId();
         }
