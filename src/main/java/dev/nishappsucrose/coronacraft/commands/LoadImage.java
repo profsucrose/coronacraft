@@ -1,22 +1,32 @@
 package dev.nishappsucrose.coronacraft.commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.util.Base64;
 import java.util.HashMap;
 
 public class LoadImage implements CommandExecutor {
 
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
+    public static Plugin plugin;
+    public static Integer taskId;
 
     private static final Material[] CONCRETES = {
             Material.WHITE_CONCRETE,
@@ -40,8 +50,8 @@ public class LoadImage implements CommandExecutor {
     // Given RGB (10, 200, 34)
     // Find RGB in array that's the closest
 
-    private static final int[][][] CONCRETE_RGBS = {
-            {{250, 255}, {250, 255}, {250, 255}},
+    private static final int[][] CONCRETE_RGBS = {
+            {255, 255, 255},
             {255, 165, 0},
             {128, 0, 128},
             {52, 204, 255},
@@ -59,35 +69,38 @@ public class LoadImage implements CommandExecutor {
             {0, 0, 0}
     };
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (args.length < 2) {
-            sender.sendMessage("Must specify file path and map size");
-            return false;
-        }
-
-        String imageUrl = args[0];
-        int mapSize = Integer.parseInt(args[1]);
+    static private void loadImage(CommandSender sender, int mapSize) {
 
         Player player = (Player) sender;
 
         // -65 4 192
         // -192 4 319
 
-
-
-
         BufferedImage image = null;
 
         try {
-            URL url = new URL(imageUrl);
-            image = ImageIO.read(url);
+            URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/videostreams/test");
+            HttpURLConnection con = (HttpURLConnection) streamCaptureDownload.openConnection();
+            con.setRequestMethod("GET");
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer content = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                content.append(inputLine);
+            }
+            in.close();
+            con.disconnect();
+            String base64String = content.toString().split("data:image/jpeg;base64,")[1].split("\"    ")[0];
+
+            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
+
+            image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
 
             sender.sendMessage("Loading image to map");
 
-            for (int mapX = 0; mapX < mapSize; mapX++) {
-                for (int mapY = 0; mapY < mapSize; mapY++) {
+            for (int mapY = 0; mapY < mapSize; mapY++) {
+                for (int mapX = mapSize - 1; mapX > -1; mapX--) {
 
                     System.out.println(mapX + ", " + mapY);
 
@@ -102,7 +115,10 @@ public class LoadImage implements CommandExecutor {
                     for (int rgbI = 1; rgbI < CONCRETE_RGBS.length; rgbI++) {
                         int[] rgb = CONCRETE_RGBS[rgbI];
                         double difference = getBlockDiff(red, green, blue, rgb);
-                        if (difference < currentBlockDiff) currentBlockIndex = rgbI;
+                        if (difference < currentBlockDiff) {
+                            currentBlockDiff = difference;
+                            currentBlockIndex = rgbI;
+                        }
                     }
 
                     player.getWorld().getBlockAt(-192 + mapX, 4, mapY + 192).setType(CONCRETES[currentBlockIndex]);
@@ -116,17 +132,46 @@ public class LoadImage implements CommandExecutor {
             sender.sendMessage(ERROR_COLOR + "Could not load image");
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+
+        if (args.length < 2) {
+            sender.sendMessage("Must specify map size and isToggled");
+            return false;
+        }
+
+        int mapSize = Integer.parseInt(args[0]);
+        boolean isToggled = Boolean.parseBoolean(args[1]);
+
+        if (taskId == null) {
+            taskId = new BukkitRunnable() {
+                @Override
+                public void run() {
+                    loadImage(sender, mapSize);
+                }
+            }.runTaskTimer(plugin, 0, 15).getTaskId();
+        }
+
+        if (!isToggled) {
+            Bukkit.getScheduler().cancelTask(taskId);
+            taskId = null;
+            sender.sendMessage(ChatColor.GREEN + "Streaming started successfully");
+        } else {
+            sender.sendMessage(ChatColor.GREEN + "Streaming stopped successfully");
+        }
 
         return true;
 
     }
 
-    double getBlockDiff(int red, int blue, int green, int[] block) {
-        long rmean = ( (long)red + (long)block[0] ) / 2;
-        long r = (long)red - (long)block[0];
-        long g = (long)green - (long)block[1];
-        long b = (long)blue - (long)block[2];
-        return Math.sqrt((((512+rmean)*r*r)>>8) + 4*g*g + (((767-rmean)*b*b)>>8));
+    static double getBlockDiff(int red, int blue, int green, int[] block) {
+        return Math.sqrt(
+                Math.pow(red - block[0], 2)
+                + Math.pow(blue - block[1], 2)
+                + Math.pow(green - block[2], 2)
+        );
     }
 
 }

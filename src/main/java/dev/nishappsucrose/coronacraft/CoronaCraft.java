@@ -8,6 +8,7 @@ public final class CoronaCraft extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
+        LoadImage.plugin = this;
         this.getCommand("loadimage").setExecutor(new LoadImage());
     }
 
