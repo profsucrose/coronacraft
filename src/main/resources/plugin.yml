@@ -5,3 +5,5 @@ api-version: 1.13
 commands:
   loadimage:
     description: Test map an image to a glass pane matrix
+  origin:
+    description: Teleport player back to viewing area

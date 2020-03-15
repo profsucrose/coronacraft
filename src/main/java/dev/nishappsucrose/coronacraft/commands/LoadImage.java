@@ -28,7 +28,7 @@ public class LoadImage implements CommandExecutor {
     public static Plugin plugin;
     public static Integer taskId;
     private static final String[] streamIds = {"one", "two", "three", "four"};
-    private static final int[][] streamCoords = {{-192, 192}, {-135, 192}, {-192, 249}, {-135, 249}};
+    private static final int[][] streamCoords = {{-192, 192}, {-135, 192}, {-135, 249}, {-192, 249}};
 
     private static final Material[] CONCRETES = {
             Material.WHITE_CONCRETE,
@@ -107,7 +107,7 @@ public class LoadImage implements CommandExecutor {
                     image = ImageIO.read(new URL("https://i.imgur.com/zrYfqjY.jpg"));
                 }
 
-                sender.sendMessage("Loading image to map");
+                sender.sendMessage("Loading channel " + channel);
 
                 for (int mapY = 0; mapY < 50; mapY++) {
                     for (int mapX = 49; mapX > -1; mapX--) {
@@ -131,12 +131,13 @@ public class LoadImage implements CommandExecutor {
                             }
                         }
 
-                        player.getWorld().getBlockAt(x + mapX, 4, y + 192).setType(CONCRETES[currentBlockIndex]);
-                        System.out.println("RGB: " + red + ", " + green + ", " + blue);
-                        System.out.println("Placed concrete at index: " + currentBlockIndex);
+                        player.getWorld().getBlockAt(x + mapX, 4, y + mapY).setType(CONCRETES[currentBlockIndex]);
+                        System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                     }
                 }
+
+                sender.sendMessage("Loaded channel " + channel + " successfully");
 
             } catch (IOException e) {
                 sender.sendMessage(ERROR_COLOR + "Could not load image");
@@ -148,13 +149,12 @@ public class LoadImage implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        if (args.length < 2) {
-            sender.sendMessage("Must specify map size and isToggled");
+        if (args.length < 1) {
+            sender.sendMessage("Must specify isToggled");
             return false;
         }
 
-        int mapSize = Integer.parseInt(args[0]);
-        boolean isToggled = Boolean.parseBoolean(args[1]);
+        boolean isToggled = Boolean.parseBoolean(args[0]);
 
         if (taskId == null) {
             taskId = new BukkitRunnable() {
@@ -168,9 +168,9 @@ public class LoadImage implements CommandExecutor {
         if (!isToggled) {
             Bukkit.getScheduler().cancelTask(taskId);
             taskId = null;
-            sender.sendMessage(ChatColor.GREEN + "Streaming started successfully");
-        } else {
             sender.sendMessage(ChatColor.GREEN + "Streaming stopped successfully");
+        } else {
+            sender.sendMessage(ChatColor.GREEN + "Streaming started successfully");
         }
 
         return true;
