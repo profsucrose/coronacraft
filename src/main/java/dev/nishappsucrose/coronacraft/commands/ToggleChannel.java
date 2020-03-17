@@ -15,7 +15,7 @@ public class ToggleChannel implements CommandExecutor {
     private static void fillArea(int x, int y, int z, Material block) {
         for (int mapY = 0; mapY < 50; mapY++) {
             for (int mapX = 49; mapX > -1; mapX--)
-                Bukkit.getWorld("world").getBlockAt(x + mapX, z, y + mapY).setType(block);
+                Bukkit.getWorld("world").getBlockAt(x + mapX, y, z + mapY).setType(block);
         }
     }
 

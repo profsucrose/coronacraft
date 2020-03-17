@@ -7,3 +7,5 @@ commands:
     description: Test map an image to a glass pane matrix
   origin:
     description: Teleport player back to viewing area
+  togglechannel:
+    description: Stop loading channel for faster bitrates on others

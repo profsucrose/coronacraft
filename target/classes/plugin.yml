@@ -3,7 +3,9 @@ version: 1.0-SNAPSHOT
 main: dev.nishappsucrose.coronacraft.CoronaCraft
 api-version: 1.13
 commands:
-  loadimage:
+  loadstreams:
     description: Test map an image to a glass pane matrix
   origin:
     description: Teleport player back to viewing area
+  togglechannel:
+    description: Stop loading channel for faster bitrates on others

@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="efc6492d-35c3-4eeb-bfc4-1479aa4f0445" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/ToggleChannel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadStreams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadStreams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadStreams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/ToggleChannel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/ToggleChannel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadImage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
@@ -114,29 +116,34 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="554" y="178" key="#com.intellij.ide.util.MemberChooser/0.23.1440.877@0.23.1440.877" timestamp="1584312451320" />
-    <state x="592" y="387" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1584136465605">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="789" y="432" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1584472361118">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="789" y="432" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1584472361118" />
     <state x="592" y="387" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.877@0.23.1440.877" timestamp="1584136465605" />
     <state x="683" y="150" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1584175112701">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="683" y="150" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.1440.877@0.23.1440.877" timestamp="1584175112701" />
-    <state width="1127" height="133" key="GridCell.Tab.0.bottom" timestamp="1584334562271">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1575" height="266" key="GridCell.Tab.0.bottom" timestamp="1584480183392">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1575" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584480183392" />
     <state width="1127" height="133" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1584334562271" />
-    <state width="1127" height="133" key="GridCell.Tab.0.center" timestamp="1584334562268">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1575" height="266" key="GridCell.Tab.0.center" timestamp="1584480183392">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1575" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584480183392" />
     <state width="1127" height="133" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1584334562268" />
-    <state width="1127" height="133" key="GridCell.Tab.0.left" timestamp="1584334562266">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1575" height="266" key="GridCell.Tab.0.left" timestamp="1584480183392">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1575" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584480183392" />
     <state width="1127" height="133" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1584334562266" />
-    <state width="1127" height="133" key="GridCell.Tab.0.right" timestamp="1584334562269">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1575" height="266" key="GridCell.Tab.0.right" timestamp="1584480183392">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state width="1575" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584480183392" />
     <state width="1127" height="133" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1584334562269" />
     <state x="128" y="43" key="SettingsEditor" timestamp="1584296298956">
       <screen x="0" y="23" width="1440" height="877" />

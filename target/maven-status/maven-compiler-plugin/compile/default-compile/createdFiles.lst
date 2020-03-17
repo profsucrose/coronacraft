@@ -1,5 +1,6 @@
-dev/nishappsucrose/coronacraft/events/PlayerJoin.class
-dev/nishappsucrose/coronacraft/commands/Origin.class
-dev/nishappsucrose/coronacraft/CoronaCraft.class
-dev/nishappsucrose/coronacraft/commands/LoadImage.class
-dev/nishappsucrose/coronacraft/commands/LoadImage$1.class
+dev\nishappsucrose\coronacraft\CoronaCraft.class
+dev\nishappsucrose\coronacraft\commands\Origin.class
+dev\nishappsucrose\coronacraft\commands\LoadStreams.class
+dev\nishappsucrose\coronacraft\events\PlayerJoin.class
+dev\nishappsucrose\coronacraft\commands\LoadStreams$1.class
+dev\nishappsucrose\coronacraft\commands\ToggleChannel.class
