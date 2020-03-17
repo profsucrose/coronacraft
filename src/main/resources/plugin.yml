@@ -3,7 +3,7 @@ version: ${project.version}
 main: dev.nishappsucrose.coronacraft.CoronaCraft
 api-version: 1.13
 commands:
-  loadimage:
+  loadstreams:
     description: Test map an image to a glass pane matrix
   origin:
     description: Teleport player back to viewing area
