@@ -9,3 +9,5 @@ commands:
     description: Teleport player back to viewing area
   togglechannel:
     description: Stop loading channel for faster bitrates on others
+  hdtest:
+    description: Hacky "HD" video test

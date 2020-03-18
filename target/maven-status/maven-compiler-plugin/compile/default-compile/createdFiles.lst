@@ -3,4 +3,5 @@ dev\nishappsucrose\coronacraft\commands\Origin.class
 dev\nishappsucrose\coronacraft\commands\LoadStreams.class
 dev\nishappsucrose\coronacraft\events\PlayerJoin.class
 dev\nishappsucrose\coronacraft\commands\LoadStreams$1.class
+dev\nishappsucrose\coronacraft\commands\HDTest.class
 dev\nishappsucrose\coronacraft\commands\ToggleChannel.class
