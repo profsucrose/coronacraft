@@ -11,3 +11,7 @@ commands:
     description: Stop loading channel for faster bitrates on others
   hdtest:
     description: Hacky "HD" video test
+  loadimage:
+    description: Load image from URL
+  livetest:
+    description: Test snapshot listener for better FPS

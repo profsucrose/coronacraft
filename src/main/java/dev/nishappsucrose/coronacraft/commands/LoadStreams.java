@@ -1,5 +1,8 @@
 package dev.nishappsucrose.coronacraft.commands;
 
+import com.google.cloud.firestore.*;
+import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.database.annotations.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -27,6 +30,7 @@ public class LoadStreams implements CommandExecutor {
 
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
+    private static final Firestore db = FirestoreClient.getFirestore();
 
     public static Plugin plugin;
     public static Integer taskId;
@@ -192,15 +196,26 @@ public class LoadStreams implements CommandExecutor {
 
         boolean isToggled = Boolean.parseBoolean(args[0]);
 
-        if (taskId == null) {
-            taskId = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    loadStreams(sender);
+        /*db.document("videostreams/one")
+                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot,
+                                @Nullable FirestoreException e) {
+                if (e != null) {
+                    System.err.println("Listen failed: " + e);
+                    return;
                 }
-            }.runTaskTimer(plugin, 0, 15).getTaskId();
-        }
 
+                if (snapshot != null && snapshot.exists()) {
+                    System.out.println("Current data: " + snapshot.getData());
+                    String imageBase64 = (String) snapshot.get("image");
+                    if (streamingDisabled) return;
+                    loadStreams(sender, imageBase64);
+                } else {
+                    System.out.print("Current data: null");
+                }
+            }
+        })*/
         if (!isToggled) {
             Bukkit.getScheduler().cancelTask(taskId);
             taskId = null;
