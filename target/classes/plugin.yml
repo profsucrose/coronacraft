@@ -5,8 +5,8 @@ api-version: 1.13
 commands:
   loadstreams:
     description: Test map an image to a glass pane matrix
-  origin:
-    description: Teleport player back to viewing area
+  home:
+    description: Teleport player back to main area
   togglechannel:
     description: Stop loading channel for faster bitrates on others
   hdtest:
@@ -15,3 +15,9 @@ commands:
     description: Load image from URL
   livetest:
     description: Test snapshot listener for better FPS
+  audiostream:
+    description: Load audio streams
+  create:
+    description: Create new CallCraft room
+  join:
+    description: Join room

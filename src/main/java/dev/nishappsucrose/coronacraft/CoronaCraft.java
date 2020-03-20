@@ -42,11 +42,14 @@ public final class CoronaCraft extends JavaPlugin {
         LoadStreams.plugin = this;
         HDTest.plugin = this;
         this.getCommand("loadstreams").setExecutor(new LoadStreams());
-        this.getCommand("origin").setExecutor(new Origin());
+        this.getCommand("home").setExecutor(new Home());
         this.getCommand("togglechannel").setExecutor(new ToggleChannel());
         this.getCommand("hdtest").setExecutor(new HDTest());
         this.getCommand("loadimage").setExecutor(new LoadImage());
         this.getCommand("livetest").setExecutor(new LiveTest());
+        this.getCommand("audiostream").setExecutor(new AudioStream());
+        this.getCommand("create").setExecutor(new CreateRoom());
+        this.getCommand("join").setExecutor(new JoinRoom());
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
     }

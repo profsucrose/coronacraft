@@ -33,6 +33,7 @@ public class LiveTest implements CommandExecutor {
 
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
+    private static boolean readyToLoadNew = true;
 
     public static Plugin plugin;
 
@@ -113,6 +114,7 @@ public class LiveTest implements CommandExecutor {
 
     static private void loadStreams(CommandSender sender, String base64String) {
 
+        readyToLoadNew = false;
         Player player = (Player) sender;
 
         // -65 4 192
@@ -122,11 +124,14 @@ public class LiveTest implements CommandExecutor {
         int x = 5000;
         int y = 5000;
 
-        System.out.println("Loading stream with image base64: "  + base64String);
+        //System.out.println("Loading stream with image base64: "  + base64String);
 
         try {
-            byte[] decodedBytes = Base64.getDecoder().decode(base64String);
+            System.out.println("In try block");
+            String parsedBase64String = base64String.split("data:image/jpeg;base64,")[1].split("\"    ")[0];
+            byte[] decodedBytes = Base64.getDecoder().decode(parsedBase64String);
             image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
+            System.out.println("Loaded up image to variable");
 
             int height = image.getHeight();
             int width = image.getWidth();
@@ -163,6 +168,7 @@ public class LiveTest implements CommandExecutor {
             }
 
             image.flush();
+            readyToLoadNew = true;
 
         } catch (IOException e) {
             System.out.println("Error caught");
@@ -180,6 +186,7 @@ public class LiveTest implements CommandExecutor {
                     @Override
                     public void onEvent(@Nullable DocumentSnapshot snapshot,
                                         @Nullable FirestoreException e) {
+                        if (!readyToLoadNew) return;
                         if (e != null) {
                             System.err.println("Listen failed: " + e);
                             return;

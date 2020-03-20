@@ -30,13 +30,14 @@ public class LoadStreams implements CommandExecutor {
 
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
-    private static final Firestore db = FirestoreClient.getFirestore();
+
 
     public static Plugin plugin;
     public static Integer taskId;
     private static final String[] streamIds = {"one", "two", "three", "four"};
     public static final int[][] streamCoords = {{-192, 192}, {-135, 192}, {-135, 249}, {-192, 249}};
     private static final String peppaPlaceholderURL = "https://i.imgur.com/zrYfqjY.jpg";
+    private static final int STREAM_REFRESH_SPEED = 1;
 
     private static final Material[] BLOCKS = {
             Material.TERRACOTTA,
@@ -196,31 +197,18 @@ public class LoadStreams implements CommandExecutor {
 
         boolean isToggled = Boolean.parseBoolean(args[0]);
 
-        /*db.document("videostreams/one")
-                .addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot snapshot,
-                                @Nullable FirestoreException e) {
-                if (e != null) {
-                    System.err.println("Listen failed: " + e);
-                    return;
-                }
-
-                if (snapshot != null && snapshot.exists()) {
-                    System.out.println("Current data: " + snapshot.getData());
-                    String imageBase64 = (String) snapshot.get("image");
-                    if (streamingDisabled) return;
-                    loadStreams(sender, imageBase64);
-                } else {
-                    System.out.print("Current data: null");
-                }
-            }
-        })*/
         if (!isToggled) {
             Bukkit.getScheduler().cancelTask(taskId);
             taskId = null;
             Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming stopped successfully");
         } else {
+            taskId = new BukkitRunnable() {
+                @Override
+                public void run() {
+                    //code
+                    loadStreams(sender);
+                }
+            }.runTaskTimer(plugin, 0, STREAM_REFRESH_SPEED).getTaskId();
             Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming started successfully");
         }
 
