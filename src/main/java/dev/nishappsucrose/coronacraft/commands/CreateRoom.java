@@ -2,6 +2,8 @@ package dev.nishappsucrose.coronacraft.commands;
 
 import dev.nishappsucrose.coronacraft.EmptyChunkGenerator;
 import dev.nishappsucrose.coronacraft.WorldChat;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -48,6 +50,15 @@ public class CreateRoom implements CommandExecutor {
                 + roomId
                 + ChatColor.RESET
                 + TEXT_COLOR + ".");
+        WorldChat.sendWorldMessage(roomId, "" + TEXT_COLOR
+                + ChatColor.UNDERLINE
+                + "Go to https://coronacraft-0.web.app/room/"
+                + roomId
+                + ChatColor.RESET
+                + ChatColor.GOLD
+                + " to get started!"
+
+        );
 
         return true;
     }
