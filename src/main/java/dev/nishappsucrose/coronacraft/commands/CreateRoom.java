@@ -1,5 +1,7 @@
 package dev.nishappsucrose.coronacraft.commands;
 
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 import dev.nishappsucrose.coronacraft.EmptyChunkGenerator;
 import dev.nishappsucrose.coronacraft.WorldChat;
 import net.md_5.bungee.api.chat.ClickEvent;
@@ -13,14 +15,13 @@ import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
 
 import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class CreateRoom implements CommandExecutor {
 
     private static final Random rand = new Random();
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
+    private static final Firestore db = FirestoreClient.getFirestore();
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -40,7 +41,17 @@ public class CreateRoom implements CommandExecutor {
         room.setGameRule(GameRule.FALL_DAMAGE, false);
         room.setTime(6000);
 
-        fillArea(room, -107, 80, -107, 107, 81, 107, Material.WHITE_CONCRETE);
+        // Create firestore room entry
+        Map<String, Object> emptyChannel = new HashMap<>();
+        emptyChannel.put("image", "");
+
+
+        db.document("rooms/" + roomId + "/videostreams/one").set(emptyChannel);
+        db.document("rooms/" + roomId + "/videostreams/two").set(emptyChannel);
+        db.document("rooms/" + roomId + "/videostreams/three").set(emptyChannel);
+        db.document("rooms/" + roomId + "/videostreams/four").set(emptyChannel);
+
+        fillArea(room, -53, 80, -53, 54, 81, 54, Material.WHITE_CONCRETE);
         roomCreator.teleport(room.getSpawnLocation());
         WorldChat.sendWorldMessage(roomId, TEXT_COLOR
                 + "Welcome to your CallCraft room.");
@@ -50,9 +61,10 @@ public class CreateRoom implements CommandExecutor {
                 + roomId
                 + ChatColor.RESET
                 + TEXT_COLOR + ".");
-        WorldChat.sendWorldMessage(roomId, "" + TEXT_COLOR
+        WorldChat.sendWorldMessage(roomId,TEXT_COLOR
+                + "Go to "
                 + ChatColor.UNDERLINE
-                + "Go to https://coronacraft-0.web.app/room/"
+                + "https://coronacraft-0.web.app/room/"
                 + roomId
                 + ChatColor.RESET
                 + ChatColor.GOLD

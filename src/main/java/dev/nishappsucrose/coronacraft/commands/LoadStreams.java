@@ -35,7 +35,7 @@ public class LoadStreams implements CommandExecutor {
     public static Plugin plugin;
     public static Integer taskId;
     private static final String[] streamIds = {"one", "two", "three", "four"};
-    public static final int[][] streamCoords = {{-192, 192}, {-135, 192}, {-135, 249}, {-192, 249}};
+    public static final int[][] streamCoords = {{-51, -51}, {2, -51}, {-51, 2}, {2, 2}};
     private static final String peppaPlaceholderURL = "https://i.imgur.com/zrYfqjY.jpg";
     private static final int STREAM_REFRESH_SPEED = 1;
 
@@ -130,7 +130,7 @@ public class LoadStreams implements CommandExecutor {
             int y = streamCoords[i][1];
 
             try {
-                URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/videostreams/" + channel);
+                URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/rooms/" + player.getWorld().getName() + "/videostreams/" + channel);
                 HttpURLConnection con = (HttpURLConnection) streamCaptureDownload.openConnection();
                 con.setRequestMethod("GET");
                 BufferedReader in = new BufferedReader(
@@ -172,7 +172,7 @@ public class LoadStreams implements CommandExecutor {
                             }
                         }
 
-                        player.getWorld().getBlockAt(x + mapX, 4, y + mapY).setType(BLOCKS[currentBlockIndex]);
+                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(BLOCKS[currentBlockIndex]);
                         //System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                     }
