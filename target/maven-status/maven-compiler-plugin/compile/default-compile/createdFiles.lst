@@ -12,6 +12,7 @@ dev\nishappsucrose\coronacraft\commands\HDTest.class
 dev\nishappsucrose\coronacraft\commands\LiveTest.class
 dev\nishappsucrose\coronacraft\commands\AudioStream$2.class
 dev\nishappsucrose\coronacraft\commands\ToggleChannel.class
+dev\nishappsucrose\coronacraft\events\PlayerMove.class
 dev\nishappsucrose\coronacraft\commands\AudioStream.class
 dev\nishappsucrose\coronacraft\CoronaCraft.class
 dev\nishappsucrose\coronacraft\commands\CreateRoom.class

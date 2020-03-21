@@ -35,7 +35,7 @@ public class CreateRoom implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
-        sender.sendMessage(ChatColor.GOLD + "Generating room...");
+        sender.sendMessage(ChatColor.GOLD + "Generating room, wait a few moments...");
         String roomId = generateRoomCode();
         WorldCreator wc = new WorldCreator(roomId);
         wc.generator(new EmptyChunkGenerator());
@@ -54,7 +54,6 @@ public class CreateRoom implements CommandExecutor {
         Map<String, Object> emptyChannel = new HashMap<>();
         emptyChannel.put("image", "");
 
-
         db.document("rooms/" + roomId + "/videostreams/one").set(emptyChannel);
         db.document("rooms/" + roomId + "/videostreams/two").set(emptyChannel);
         db.document("rooms/" + roomId + "/videostreams/three").set(emptyChannel);
@@ -62,31 +61,35 @@ public class CreateRoom implements CommandExecutor {
 
         fillArea(room, -53, 80, -53, 54, 81, 54, Material.WHITE_CONCRETE);
         createStructures(room);
-        roomCreator.teleport(room.getSpawnLocation());
-        WorldChat.sendWorldMessage(roomId, TEXT_COLOR
-                + "Welcome to your CallCraft room.");
-        WorldChat.sendWorldMessage(roomId, TEXT_COLOR
-                + "Your room ID is "
-                + ChatColor.BOLD
-                + roomId
-                + ChatColor.RESET
-                + TEXT_COLOR + ".");
-        WorldChat.sendWorldMessage(roomId,TEXT_COLOR
-                + "Go to "
-                + ChatColor.UNDERLINE
-                + "https://coronacraft-0.web.app/room/"
-                + roomId
-                + ChatColor.RESET
-                + ChatColor.GOLD
-                + " to get started!"
-
-        );
 
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
                 LoadStreams.startVideoCall(roomCreator);
                 AudioStream.startAudioStream(roomCreator);
+                roomCreator.teleport(room.getSpawnLocation());
+
+                WorldChat.sendWorldMessage(roomId, TEXT_COLOR
+                        + "Welcome to your CallCraft room!");
+                WorldChat.sendWorldMessage(roomId, TEXT_COLOR
+                        + "Your room ID is "
+                        + ChatColor.BOLD
+                        + roomId
+                        + ChatColor.RESET
+                        + TEXT_COLOR + ".");
+                WorldChat.sendWorldMessage(roomId, TEXT_COLOR
+                        + "/resetview to teleport back to the viewing area.");
+                WorldChat.sendWorldMessage(roomId, TEXT_COLOR
+                        + "/home to teleport back to the lobby.");
+                WorldChat.sendWorldMessage(roomId,TEXT_COLOR
+                        + "Go to "
+                        + ChatColor.UNDERLINE
+                        + "https://coronacraft-0.web.app/room/"
+                        + roomId
+                        + ChatColor.RESET
+                        + ChatColor.GOLD
+                        + " to get started!"
+                );
             }
         }, 40);
 

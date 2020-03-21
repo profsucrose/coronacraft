@@ -6,6 +6,7 @@ import com.google.firebase.FirebaseOptions;
 import dev.nishappsucrose.coronacraft.commands.*;
 import dev.nishappsucrose.coronacraft.events.PerWorldChat;
 import dev.nishappsucrose.coronacraft.events.PlayerJoin;
+import dev.nishappsucrose.coronacraft.events.PlayerMove;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -52,10 +53,11 @@ public final class CoronaCraft extends JavaPlugin {
         this.getCommand("livetest").setExecutor(new LiveTest());
         this.getCommand("create").setExecutor(new CreateRoom());
         this.getCommand("join").setExecutor(new JoinRoom());
-        this.getCommand("resetview").setExecutor(new JoinRoom());
+        this.getCommand("resetview").setExecutor(new ResetView());
 
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoin(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new PerWorldChat(), this);
+        Bukkit.getServer().getPluginManager().registerEvents(new PlayerMove(), this);
 
     }
 
