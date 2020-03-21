@@ -13,6 +13,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.generator.BlockPopulator;
 import org.bukkit.generator.ChunkGenerator;
+import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -22,6 +23,14 @@ public class CreateRoom implements CommandExecutor {
     private static final Random rand = new Random();
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final Firestore db = FirestoreClient.getFirestore();
+
+    public static Plugin plugin;
+
+    private static final int[][] one = {{-59, -49}, {-58, -50}, {-57, -51}, {-57, -50}, {-57, -49}, {-57, -48}, {-57, -47}, {-56, -47}, {-55, -47}, {-58, -47}, {-59, -47}};
+    private static final int[][] two = {{55, -50}, {56, -51}, {57, -51}, {58, -50}, {57, -51}, {58, -50}, {57, -49}, {56, -48}, {56, -47}, {57, -47}, {58, -47}, {55, -47}};
+    private static final int[][] three = {{-58, 6}, {-57, 6}, {-56, 6}, {-55, 5}, {-56, 4}, {-57, 4}, {-55, 3}, {-56, 2}, {-57, 2}, {-58, 2}};
+    private static final int[][] four = {{55, 2}, {55, 3}, {55, 4}, {56, 4}, {57, 4}, {58, 4}, {58, 3}, {58, 2}, {58, 5}, {58, 6}};
+    private static final Material[] numberMaterials = {Material.ORANGE_CONCRETE, Material.MAGENTA_CONCRETE, Material.LIGHT_BLUE_CONCRETE, Material.LIME_CONCRETE};
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -35,7 +44,7 @@ public class CreateRoom implements CommandExecutor {
         Player roomCreator = (Player) sender;
         World room = Bukkit.getWorld(roomId);
 
-        room.setSpawnLocation(0, 160, 0);
+        room.setSpawnLocation(0, 165, 0);
         room.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         room.setGameRule(GameRule.DO_MOB_SPAWNING, false);
         room.setGameRule(GameRule.FALL_DAMAGE, false);
@@ -52,6 +61,7 @@ public class CreateRoom implements CommandExecutor {
         db.document("rooms/" + roomId + "/videostreams/four").set(emptyChannel);
 
         fillArea(room, -53, 80, -53, 54, 81, 54, Material.WHITE_CONCRETE);
+        createStructures(room);
         roomCreator.teleport(room.getSpawnLocation());
         WorldChat.sendWorldMessage(roomId, TEXT_COLOR
                 + "Welcome to your CallCraft room.");
@@ -72,6 +82,14 @@ public class CreateRoom implements CommandExecutor {
 
         );
 
+        Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
+            @Override
+            public void run() {
+                LoadStreams.startVideoCall(roomCreator);
+                AudioStream.startAudioStream(roomCreator);
+            }
+        }, 40);
+
         return true;
     }
 
@@ -83,6 +101,18 @@ public class CreateRoom implements CommandExecutor {
                 }
             }
         }
+    }
+
+    private static void createStructures(World world) {
+        int[][][] numbers = {one, two, three, four};
+        for (int i = 0; i < numbers.length; i++) {
+            int[][] structure = numbers[i];
+            for (int[] blockCoords : structure) {
+                world.getBlockAt(blockCoords[0], 81, blockCoords[1]).setType(numberMaterials[i]);
+            }
+        }
+        world.getBlockAt(0, 164, 0).setType(Material.BARRIER);
+        world.getBlockAt(0, 167, 0).setType(Material.BLACK_CONCRETE);
     }
 
     private static final String generateRoomCode() {

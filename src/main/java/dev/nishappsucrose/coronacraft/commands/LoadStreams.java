@@ -75,6 +75,25 @@ public class LoadStreams implements CommandExecutor {
             Material.WHITE_CONCRETE
     };
 
+    private static final Material[] CONCRETE_ARRAY = {
+            Material.BLACK_CONCRETE,
+            Material.RED_CONCRETE,
+            Material.GREEN_CONCRETE,
+            Material.BROWN_CONCRETE,
+            Material.BLUE_CONCRETE,
+            Material.PURPLE_CONCRETE,
+            Material.CYAN_CONCRETE,
+            Material.LIGHT_GRAY_CONCRETE,
+            Material.GRAY_CONCRETE,
+            Material.PINK_CONCRETE,
+            Material.LIME_CONCRETE,
+            Material.YELLOW_CONCRETE,
+            Material.LIGHT_BLUE_CONCRETE,
+            Material.PURPLE_CONCRETE,
+            Material.ORANGE_CONCRETE,
+            Material.WHITE_CONCRETE
+    };
+
     // Given RGB (10, 200, 34)
     // Find RGB in array that's the closest
 
@@ -114,9 +133,26 @@ public class LoadStreams implements CommandExecutor {
             {205, 210, 211}
     };
 
-    static private void loadStreams(CommandSender sender) {
+    static private int[][] CONCRETE_RGBS = {
+            {9, 11, 16},
+            {140, 32, 32},
+            {72, 90, 36},
+            {95, 58, 31},
+            {44, 46, 142},
+            {100, 31, 154},
+            {21, 117, 133},
+            {124, 124, 114},
+            {53, 56, 60},
+            {211, 102, 142},
+            {94, 168, 24},
+            {237, 173, 21},
+            {35, 135, 196},
+            {167, 47, 157},
+            {219, 95, 0},
+            {205, 210, 211}
+    };
 
-        Player player = (Player) sender;
+    static private void loadStreams(Player player) {
 
         // -65 4 192
         // -192 4 319
@@ -142,12 +178,18 @@ public class LoadStreams implements CommandExecutor {
                 }
                 in.close();
                 con.disconnect();
+
+                Material[] MATERIAL_ARRAY = BLOCKS;
+                int[][] RGBS_ARRAY = BLOCK_RGBS;
+
                 if (content.toString().contains("data:image/jpeg;base64,")) {
                     String base64String = content.toString().split("data:image/jpeg;base64,")[1].split("\"    ")[0];
                     byte[] decodedBytes = Base64.getDecoder().decode(base64String);
                     image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
                 } else {
                     image = ImageIO.read(new URL(peppaPlaceholderURL));
+                    MATERIAL_ARRAY = CONCRETE_ARRAY;
+                    RGBS_ARRAY = CONCRETE_RGBS;
                 }
 
                 //sender.sendMessage("Loading channel " + channel);
@@ -161,10 +203,10 @@ public class LoadStreams implements CommandExecutor {
                         int blue = color & 0x000000ff;
 
                         int currentBlockIndex = 0;
-                        double currentBlockDiff = getBlockDiff(red, green, blue, BLOCK_RGBS[0]);
+                        double currentBlockDiff = getBlockDiff(red, green, blue, RGBS_ARRAY[0]);
 
-                        for (int rgbI = 1; rgbI < BLOCK_RGBS.length; rgbI++) {
-                            int[] rgb = BLOCK_RGBS[rgbI];
+                        for (int rgbI = 1; rgbI < RGBS_ARRAY.length; rgbI++) {
+                            int[] rgb = RGBS_ARRAY[rgbI];
                             double difference = getBlockDiff(red, green, blue, rgb);
                             if (difference < currentBlockDiff) {
                                 currentBlockDiff = difference;
@@ -172,7 +214,7 @@ public class LoadStreams implements CommandExecutor {
                             }
                         }
 
-                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(BLOCKS[currentBlockIndex]);
+                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(MATERIAL_ARRAY[currentBlockIndex]);
                         //System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                     }
@@ -181,10 +223,20 @@ public class LoadStreams implements CommandExecutor {
                 image.flush();
 
             } catch (IOException e) {
-                sender.sendMessage(ERROR_COLOR + "Could not load image");
+                player.sendMessage(ERROR_COLOR + "Could not load frame");
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void startVideoCall(Player player) {
+        taskId = new BukkitRunnable() {
+            @Override
+            public void run() {
+                //code
+                loadStreams(player);
+            }
+        }.runTaskTimer(plugin, 0, STREAM_REFRESH_SPEED).getTaskId();
     }
 
     @Override
@@ -196,19 +248,14 @@ public class LoadStreams implements CommandExecutor {
         }
 
         boolean isToggled = Boolean.parseBoolean(args[0]);
+        Player player = (Player) sender;
 
         if (!isToggled) {
             Bukkit.getScheduler().cancelTask(taskId);
             taskId = null;
             Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming stopped successfully");
         } else {
-            taskId = new BukkitRunnable() {
-                @Override
-                public void run() {
-                    //code
-                    loadStreams(sender);
-                }
-            }.runTaskTimer(plugin, 0, STREAM_REFRESH_SPEED).getTaskId();
+            startVideoCall(player);
             Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming started successfully");
         }
 

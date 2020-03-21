@@ -1,8 +1,11 @@
 dev\nishappsucrose\coronacraft\commands\LoadImage.class
+dev\nishappsucrose\coronacraft\commands\CreateRoom$1.class
 dev\nishappsucrose\coronacraft\commands\LoadStreams.class
 dev\nishappsucrose\coronacraft\events\PlayerJoin.class
 dev\nishappsucrose\coronacraft\commands\AudioStream$3.class
 dev\nishappsucrose\coronacraft\commands\AudioStream$1.class
+dev\nishappsucrose\coronacraft\commands\ResetView.class
+dev\nishappsucrose\coronacraft\events\PerWorldChat.class
 dev\nishappsucrose\coronacraft\WorldChat.class
 dev\nishappsucrose\coronacraft\commands\LoadStreams$1.class
 dev\nishappsucrose\coronacraft\commands\HDTest.class

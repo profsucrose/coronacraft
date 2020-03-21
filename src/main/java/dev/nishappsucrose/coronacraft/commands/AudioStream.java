@@ -14,11 +14,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 
-public class AudioStream implements CommandExecutor {
+public class AudioStream {
     private static final Firestore db = FirestoreClient.getFirestore();
     private static boolean didRetrieveAudio = false;
     private static final HashMap<String, ChatColor> channelColors =  new HashMap<String, ChatColor>() {{
@@ -28,9 +26,7 @@ public class AudioStream implements CommandExecutor {
         put("four", ChatColor.GREEN);
     }};
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-        Player player = (Player) sender;
+    public static boolean startAudioStream(Player player) {
         String roomId = player.getWorld().getName();
         db.collection("rooms/" + roomId + "/chat")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
