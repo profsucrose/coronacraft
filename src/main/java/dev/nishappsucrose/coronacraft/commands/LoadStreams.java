@@ -24,16 +24,15 @@ import java.awt.image.BufferedImage;
 import java.util.Base64;
 import java.util.HashMap;
 
-public class LoadStreams implements CommandExecutor {
+public class LoadStreams {
 
     public static boolean[] blockedStreams = {false, false, false, false};
 
     private static final ChatColor TEXT_COLOR = ChatColor.GOLD;
     private static final ChatColor ERROR_COLOR = ChatColor.RED;
 
-
     public static Plugin plugin;
-    public static Integer taskId;
+    public static HashMap<String, Integer> streamTaskIds = new HashMap<>();
     private static final String[] streamIds = {"one", "two", "three", "four"};
     public static final int[][] streamCoords = {{-51, -51}, {2, -51}, {-51, 2}, {2, 2}};
     private static final String peppaPlaceholderURL = "https://i.imgur.com/zrYfqjY.jpg";
@@ -57,25 +56,6 @@ public class LoadStreams implements CommandExecutor {
             Material.MAGENTA_TERRACOTTA,
             Material.ORANGE_TERRACOTTA,
             Material.WHITE_TERRACOTTA,
-            Material.BLACK_CONCRETE,
-            Material.RED_CONCRETE,
-            Material.GREEN_CONCRETE,
-            Material.BROWN_CONCRETE,
-            Material.BLUE_CONCRETE,
-            Material.PURPLE_CONCRETE,
-            Material.CYAN_CONCRETE,
-            Material.LIGHT_GRAY_CONCRETE,
-            Material.GRAY_CONCRETE,
-            Material.PINK_CONCRETE,
-            Material.LIME_CONCRETE,
-            Material.YELLOW_CONCRETE,
-            Material.LIGHT_BLUE_CONCRETE,
-            Material.PURPLE_CONCRETE,
-            Material.ORANGE_CONCRETE,
-            Material.WHITE_CONCRETE
-    };
-
-    private static final Material[] CONCRETE_ARRAY = {
             Material.BLACK_CONCRETE,
             Material.RED_CONCRETE,
             Material.GREEN_CONCRETE,
@@ -133,29 +113,7 @@ public class LoadStreams implements CommandExecutor {
             {205, 210, 211}
     };
 
-    static private int[][] CONCRETE_RGBS = {
-            {9, 11, 16},
-            {140, 32, 32},
-            {72, 90, 36},
-            {95, 58, 31},
-            {44, 46, 142},
-            {100, 31, 154},
-            {21, 117, 133},
-            {124, 124, 114},
-            {53, 56, 60},
-            {211, 102, 142},
-            {94, 168, 24},
-            {237, 173, 21},
-            {35, 135, 196},
-            {167, 47, 157},
-            {219, 95, 0},
-            {205, 210, 211}
-    };
-
-    static private void loadStreams(Player player) {
-
-        // -65 4 192
-        // -192 4 319
+    static private void loadStreams(Player player, String roomId) {
 
         for (int i = 0; i < 4; i++) {
             if (blockedStreams[i]) continue;
@@ -166,7 +124,7 @@ public class LoadStreams implements CommandExecutor {
             int y = streamCoords[i][1];
 
             try {
-                URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/rooms/" + player.getWorld().getName() + "/videostreams/" + channel);
+                URL streamCaptureDownload = new URL("https://firestore.googleapis.com/v1/projects/coronacraft-0/databases/(default)/documents/rooms/" + roomId + "/videostreams/" + channel);
                 HttpURLConnection con = (HttpURLConnection) streamCaptureDownload.openConnection();
                 con.setRequestMethod("GET");
                 BufferedReader in = new BufferedReader(
@@ -179,34 +137,29 @@ public class LoadStreams implements CommandExecutor {
                 in.close();
                 con.disconnect();
 
-                Material[] MATERIAL_ARRAY = BLOCKS;
-                int[][] RGBS_ARRAY = BLOCK_RGBS;
-
                 if (content.toString().contains("data:image/jpeg;base64,")) {
                     String base64String = content.toString().split("data:image/jpeg;base64,")[1].split("\"    ")[0];
                     byte[] decodedBytes = Base64.getDecoder().decode(base64String);
                     image = ImageIO.read(new ByteArrayInputStream(decodedBytes));
                 } else {
                     image = ImageIO.read(new URL(peppaPlaceholderURL));
-                    MATERIAL_ARRAY = CONCRETE_ARRAY;
-                    RGBS_ARRAY = CONCRETE_RGBS;
                 }
 
                 //sender.sendMessage("Loading channel " + channel);
 
                 for (int mapY = 0; mapY < 50; mapY++) {
-                    for (int mapX = 49; mapX > -1; mapX--) {
+                    for (int mapX = 0; mapX < 50; mapX++) {
 
-                        int color = image.getRGB(mapX, mapY);
+                        int color = image.getRGB(50 - mapX, mapY);
                         int red = (color & 0x00ff0000) >> 16;
                         int green = (color & 0x0000ff00) >> 8;
                         int blue = color & 0x000000ff;
 
                         int currentBlockIndex = 0;
-                        double currentBlockDiff = getBlockDiff(red, green, blue, RGBS_ARRAY[0]);
+                        double currentBlockDiff = getBlockDiff(red, green, blue, BLOCK_RGBS[0]);
 
-                        for (int rgbI = 1; rgbI < RGBS_ARRAY.length; rgbI++) {
-                            int[] rgb = RGBS_ARRAY[rgbI];
+                        for (int rgbI = 1; rgbI < BLOCK_RGBS.length; rgbI++) {
+                            int[] rgb = BLOCK_RGBS[rgbI];
                             double difference = getBlockDiff(red, green, blue, rgb);
                             if (difference < currentBlockDiff) {
                                 currentBlockDiff = difference;
@@ -214,7 +167,7 @@ public class LoadStreams implements CommandExecutor {
                             }
                         }
 
-                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(MATERIAL_ARRAY[currentBlockIndex]);
+                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(BLOCKS[currentBlockIndex]);
                         //System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                     }
@@ -229,38 +182,14 @@ public class LoadStreams implements CommandExecutor {
         }
     }
 
-    public static void startVideoCall(Player player) {
-        taskId = new BukkitRunnable() {
+    public static void startVideoCall(Player player, String roomId) {
+        streamTaskIds.put(roomId, new BukkitRunnable() {
             @Override
             public void run() {
                 //code
-                loadStreams(player);
+                loadStreams(player, roomId);
             }
-        }.runTaskTimer(plugin, 0, STREAM_REFRESH_SPEED).getTaskId();
-    }
-
-    @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
-
-        if (args.length < 1) {
-            sender.sendMessage("Must specify isToggled");
-            return false;
-        }
-
-        boolean isToggled = Boolean.parseBoolean(args[0]);
-        Player player = (Player) sender;
-
-        if (!isToggled) {
-            Bukkit.getScheduler().cancelTask(taskId);
-            taskId = null;
-            Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming stopped successfully");
-        } else {
-            startVideoCall(player);
-            Bukkit.broadcastMessage(ChatColor.GREEN + "Streaming started successfully");
-        }
-
-        return true;
-
+        }.runTaskTimer(plugin, 0, STREAM_REFRESH_SPEED).getTaskId());
     }
 
     static double getBlockDiff(int red, int blue, int green, int[] block) {

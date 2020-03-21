@@ -3,18 +3,8 @@ version: ${project.version}
 main: dev.nishappsucrose.coronacraft.CoronaCraft
 api-version: 1.13
 commands:
-  loadstreams:
-    description: Test map an image to a glass pane matrix
   home:
-    description: Teleport player back to lobby
-  togglechannel:
-    description: Stop loading channel for faster bitrates on others
-  hdtest:
-    description: Hacky "HD" video test
-  loadimage:
-    description: Load image from URL
-  livetest:
-    description: Test snapshot listener for better FPS
+    description: Teleport back to lobby
   create:
     description: Create new CallCraft room
   join:

@@ -65,8 +65,8 @@ public class CreateRoom implements CommandExecutor {
         Bukkit.getScheduler().scheduleSyncDelayedTask(plugin, new Runnable() {
             @Override
             public void run() {
-                LoadStreams.startVideoCall(roomCreator);
-                AudioStream.startAudioStream(roomCreator);
+                LoadStreams.startVideoCall(roomCreator, roomId);
+                AudioStream.startAudioStream(roomCreator, roomId);
                 roomCreator.teleport(room.getSpawnLocation());
 
                 WorldChat.sendWorldMessage(roomId, TEXT_COLOR

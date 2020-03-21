@@ -26,8 +26,7 @@ public class AudioStream {
         put("four", ChatColor.GREEN);
     }};
 
-    public static boolean startAudioStream(Player player) {
-        String roomId = player.getWorld().getName();
+    public static boolean startAudioStream(Player player, String roomId) {
         db.collection("rooms/" + roomId + "/chat")
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
