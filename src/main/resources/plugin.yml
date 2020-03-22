@@ -11,3 +11,5 @@ commands:
     description: Join room
   resetview:
     description: Teleport to room viewing area
+  loadimage:
+    description: Load image

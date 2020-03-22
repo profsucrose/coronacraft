@@ -3,6 +3,7 @@ package dev.nishappsucrose.coronacraft.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -127,7 +128,7 @@ public class LoadImage implements CommandExecutor {
                 for (int mapX = 0; mapX < image.getWidth(); mapX++) {
                     System.out.println(mapX + ", " + mapY);
 
-                    int color = image.getRGB(mapX, mapY);
+                    int color = image.getRGB(mapX, image.getHeight() - 1 - mapY);
                     int red = (color & 0x00ff0000) >> 16;
                     int green = (color & 0x0000ff00) >> 8;
                     int blue = color & 0x000000ff;
@@ -144,7 +145,8 @@ public class LoadImage implements CommandExecutor {
                         }
                     }
 
-                    player.getWorld().getBlockAt(5000 + mapX, 4, 5000 + mapY).setType(BLOCKS[currentBlockIndex]);
+                    Location location = player.getLocation();
+                    player.getWorld().getBlockAt((int)location.getX(), (int)location.getY() + mapY, (int)location.getZ() + mapX).setType(BLOCKS[currentBlockIndex]);
                     //System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                 }

@@ -5,10 +5,22 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/CoronaCraft.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/AudioStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/AudioStream.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/CreateRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/CreateRoom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadImage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadStreams.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/commands/LoadStreams.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/events/PlayerMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dev/nishappsucrose/coronacraft/events/PlayerMove.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT-shaded.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/CoronaCraft-1.0-SNAPSHOT-shaded.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/CoronaCraft.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/CoronaCraft.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/AudioStream.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/CreateRoom$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/CreateRoom$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/CreateRoom.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/CreateRoom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadImage.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadImage.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadStreams$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadStreams$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadStreams.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/dev/nishappsucrose/coronacraft/commands/LoadStreams.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-CoronaCraft-1.0-SNAPSHOT.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +67,7 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
@@ -115,6 +128,10 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="847" y="185" key="#Project_Structure" timestamp="1584830858958">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="847" y="185" key="#Project_Structure/0.0.1920.1040@0.0.1920.1040" timestamp="1584830858958" />
     <state x="554" y="178" key="#com.intellij.ide.util.MemberChooser" timestamp="1584312451320">
       <screen x="0" y="23" width="1440" height="877" />
     </state>
@@ -132,25 +149,25 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="903" y="438" width="456" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1040@0.0.1920.1040" timestamp="1584577959140" />
-    <state width="1547" height="266" key="GridCell.Tab.0.bottom" timestamp="1584828717999">
+    <state width="1547" height="266" key="GridCell.Tab.0.bottom" timestamp="1584836297797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1547" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584828717999" />
+    <state width="1547" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1584836297797" />
     <state width="1127" height="133" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1584334562271" />
-    <state width="1547" height="266" key="GridCell.Tab.0.center" timestamp="1584828717998">
+    <state width="1547" height="266" key="GridCell.Tab.0.center" timestamp="1584836297797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1547" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584828717998" />
+    <state width="1547" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1584836297797" />
     <state width="1127" height="133" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1584334562268" />
-    <state width="1547" height="266" key="GridCell.Tab.0.left" timestamp="1584828717998">
+    <state width="1547" height="266" key="GridCell.Tab.0.left" timestamp="1584836297797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1547" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584828717998" />
+    <state width="1547" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1584836297797" />
     <state width="1127" height="133" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1584334562266" />
-    <state width="1547" height="266" key="GridCell.Tab.0.right" timestamp="1584828717998">
+    <state width="1547" height="266" key="GridCell.Tab.0.right" timestamp="1584836297797">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1547" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584828717998" />
+    <state width="1547" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1584836297797" />
     <state width="1127" height="133" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1584334562269" />
     <state x="128" y="43" key="SettingsEditor" timestamp="1584296298956">
       <screen x="0" y="23" width="1440" height="877" />

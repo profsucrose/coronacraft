@@ -150,7 +150,7 @@ public class LoadStreams {
                 for (int mapY = 0; mapY < 50; mapY++) {
                     for (int mapX = 0; mapX < 50; mapX++) {
 
-                        int color = image.getRGB(50 - mapX, mapY);
+                        int color = image.getRGB(mapX, mapY);
                         int red = (color & 0x00ff0000) >> 16;
                         int green = (color & 0x0000ff00) >> 8;
                         int blue = color & 0x000000ff;
@@ -167,7 +167,7 @@ public class LoadStreams {
                             }
                         }
 
-                        player.getWorld().getBlockAt(x + mapX, 81, y + mapY).setType(BLOCKS[currentBlockIndex]);
+                        Bukkit.getWorld(roomId).getBlockAt(x + mapX, 81, y + mapY).setType(BLOCKS[currentBlockIndex]);
                         //System.out.println("Placed concrete at index " + currentBlockIndex + " at coordinate: " + (x + mapX) + ", " + (y + 192));
 
                     }

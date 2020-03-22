@@ -19,7 +19,8 @@ public class PlayerMove implements Listener {
         && isWithin(location.getZ(), 49, 51)
         && player.getWorld().getName() == "world"
         && isWithin(location.getY(), 34, 36)) {
-            player.teleport(player.getWorld().getSpawnLocation());
+            System.out.println("Teleporting player");
+            player.teleport(new Location(Bukkit.getWorld("world"), 24, 42, -9));
         }
 
 
