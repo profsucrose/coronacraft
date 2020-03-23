@@ -35,6 +35,7 @@ public class JoinRoom implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        player.setAllowFlight(true);
 
         player.teleport(room.getSpawnLocation());
         WorldChat.sendWorldMessage(roomId, TEXT_COLOR
@@ -57,7 +58,7 @@ public class JoinRoom implements CommandExecutor {
         player.sendMessage(TEXT_COLOR
                 + "Go to "
                 + ChatColor.UNDERLINE
-                + "https://coronacraft-0.web.app/room/"
+                + "https://callcraft.co/room/"
                 + roomId
                 + ChatColor.RESET
                 + ChatColor.GOLD

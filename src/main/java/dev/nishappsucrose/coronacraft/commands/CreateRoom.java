@@ -52,8 +52,9 @@ public class CreateRoom implements CommandExecutor {
 
         // Create firestore room entry
         Map<String, Object> emptyChannel = new HashMap<>();
-        emptyChannel.put("image", "");
+        db.document("rooms/" + roomId).set(emptyChannel);
 
+        emptyChannel.put("image", "");
         db.document("rooms/" + roomId + "/videostreams/one").set(emptyChannel);
         db.document("rooms/" + roomId + "/videostreams/two").set(emptyChannel);
         db.document("rooms/" + roomId + "/videostreams/three").set(emptyChannel);
@@ -68,6 +69,7 @@ public class CreateRoom implements CommandExecutor {
                 LoadStreams.startVideoCall(roomCreator, roomId);
                 AudioStream.startAudioStream(roomCreator, roomId);
                 roomCreator.teleport(room.getSpawnLocation());
+                roomCreator.setAllowFlight(true);
 
                 WorldChat.sendWorldMessage(roomId, TEXT_COLOR
                         + "Welcome to your CallCraft room!");
@@ -84,7 +86,7 @@ public class CreateRoom implements CommandExecutor {
                 WorldChat.sendWorldMessage(roomId,TEXT_COLOR
                         + "Go to "
                         + ChatColor.UNDERLINE
-                        + "https://coronacraft-0.web.app/room/"
+                        + "https://callcraft.co/room/"
                         + roomId
                         + ChatColor.RESET
                         + ChatColor.GOLD

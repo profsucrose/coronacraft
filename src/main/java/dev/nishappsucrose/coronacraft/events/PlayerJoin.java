@@ -17,7 +17,6 @@ public class PlayerJoin implements Listener {
         Player player = e.getPlayer();
 
         player.setGameMode(GameMode.ADVENTURE);
-        player.setAllowFlight(true);
         player.sendMessage(TEXT_COLOR + "Welcome to CallCraft!");
         player.sendMessage(TEXT_COLOR + "CallCraft is videostreaming (both video and audio via chat) in Minecraft!");
         player.sendMessage(TEXT_COLOR + "Simply run /create to create a room");
